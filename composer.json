@@ -1,0 +1,40 @@
+{
+	"name": "code-area/laraarea-seo",
+	"description": "Seo crud, content generator",
+	"keywords": ["laravel", "seo"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Codearea"
+		}
+	],
+	"require": {
+		"laravel/framework": "7.*",
+		"code-area/laraarea-admin": "10.0.*",
+		"code-area/laraarea-cache-manager": "10.0.*"
+	},
+	"require-dev": {
+		"mockery/mockery": "^1.3.1",
+		"phpunit/phpunit": "^8.5"
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"LaraAreaSeo\\Providers\\ServiceProvider"
+			]
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"LaraAreaSeo\\": "src/"
+		}
+	},
+	"suggest": {
+		"code-area/laraarea-helpers": "Useful functions"
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests/"
+		}
+	}
+}
