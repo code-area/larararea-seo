@@ -22,7 +22,7 @@ class MetaValidator extends BaseValidator
                     }
 
                     if ($max) {
-                        $this->validateContent($attribute, $value, $min, false, $fails);
+                        $this->validateContent($attribute, $value, $max, false, $fails);
                     }
                 }
             ],
