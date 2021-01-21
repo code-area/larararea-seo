@@ -13,7 +13,7 @@ class ServiceProvider extends LaraAreaServiceProvider
     {
         $this->mergeConfig(__DIR__);
         $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
-        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        //$this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 }
 
