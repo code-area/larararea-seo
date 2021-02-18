@@ -242,6 +242,6 @@ trait TranslationServiceTrait
      */
     public function getTranslatableColumns()
     {
-        return array_merge(['id'] , $this->model->getTranslateAbleColumns());
+        return array_merge(['id', $this->model->getDescriptiveAttributeName()] , $this->model->getTranslateAbleColumns());
     }
 }
