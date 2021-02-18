@@ -90,18 +90,20 @@ class SeoService extends BaseService
      */
     protected function fixDataForCreate($data)
     {
-        $routeName = $data['route_name'];
-        $routeUri = $data['uri'];
-        if ($routeName && !SeoRoute::where('name', $routeName)->exists()) {
-            SeoRoute::create([
-                'name' => $routeName
-            ]);
-        }
+        if (key_exists('route_name', $data) && key_exists('uri', $data)) {
+            $routeName = $data['route_name'];
+            $routeUri = $data['uri'];
+            if ($routeName && !SeoRoute::where('name', $routeName)->exists()) {
+                SeoRoute::create([
+                    'name' => $routeName
+                ]);
+            }
 
-        if ($routeUri && !SeoUri::where('uri', $routeUri)->exists()) {
-            SeoUri::create([
-                'uri' => $routeUri
-            ]);
+            if ($routeUri && !SeoUri::where('uri', $routeUri)->exists()) {
+                SeoUri::create([
+                    'uri' => $routeUri
+                ]);
+            }
         }
 
         return parent::fixDataForCreate($data);
@@ -164,12 +166,6 @@ class SeoService extends BaseService
         $newSeoMetaContents = $item->seo_meta_contents()->createMany($data);
         $metaContents = $oldSeoMetaContents->merge($newSeoMetaContents);
         $item->setRelation('seo_meta_contents', $metaContents);
-    }
-
-    public function createTranslation($parentId, $data)
-    {
-        $seo =  parent::createTranslation($parentId, $data);
-        return $seo;
     }
 
     public function createTranslationRelations($item, $with)
