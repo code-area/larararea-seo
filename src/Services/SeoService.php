@@ -87,20 +87,28 @@ class SeoService extends BaseService
      * @param $item
      * @return mixed
      */
-    public function translationsCreated($item)
+    public function translationsCreated($seo)
     {
+        $metaJson = $this->generateMetaJson($seo);
+        $tags = $this->getTags($metaJson);
+        $seo->update(['tags' => $tags, 'meta_json' => $metaJson]);
+
         CachedSeo::updateSeoList();
-        return $item;
+        return $seo;
     }
 
     /**
      * @param $item
      * @return mixed
      */
-    protected function translationsUpdated($item)
+    protected function translationsUpdated($seo)
     {
+        $metaJson = $this->generateMetaJson($seo);
+        $tags = $this->getTags($metaJson);
+        $seo->update(['tags' => $tags, 'meta_json' => $metaJson]);
+
         CachedSeo::updateSeoList();
-        return $item;
+        return $seo;
     }
 
     /**
