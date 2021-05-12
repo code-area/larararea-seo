@@ -98,6 +98,8 @@ class Seo extends TranslateAbleModel
         'description',
         'keywords',
         'html',
+        'meta_json',
+        'tags',
     ];
 
     /**

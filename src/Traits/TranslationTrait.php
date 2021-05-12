@@ -91,7 +91,7 @@ trait TranslationTrait
     public function translate($makeProperty = true, $lang = null)
     {
         if (key_exists('translations', $this->relations)) {
-            $this->traslation = $this->translations->first();
+            $this->traslation = $this->translations->where('lang', $lang)->first();
         } else {
             $this->traslation = null;
         }

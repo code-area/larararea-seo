@@ -73,40 +73,12 @@ class CachedSeo extends CacheManager
      */
     public static function seoListData()
     {
-        $model = new Seo();
-        $lang = 'en';
-//        $translationsData['columns'] = $model->getTranslateAbleColumns();
-//        $translationsData['columns'][] = 'parent_id';
-//        $translationsData['where'] = ['lang' => $lang];
-//
-        $seoList = \LaraAreaSeo\Models\Seo::where('is_active', \ConstYesNo::YES)
-//            ->with(['translations' => function ($query) use ($lang) {
-//                $query->select(['id', 'parent_id', 'tags'])
-//                    ->where(['lang' => $lang]);
-//            }])
+        return \LaraAreaSeo\Models\Seo::where('is_active', \ConstYesNo::YES)
+            ->with(['translations' => function ($query)  {
+                $query->where('is_active', \ConstYesNo::YES);
+            }])
             ->whereNull('parent_id')
             ->whereNotNull('route_name')
             ->with('seo_route:name,uri,template')->get();
-
-        $seoData = [];
-        foreach ($seoList->groupBy('route_name') as $routeName => $seoGroup) {
-            $data = [];
-            $isSingle = 1 == $seoGroup->count();
-            foreach ($seoGroup as $seo) {
-                if ($isSingle) {
-                    $uri = '*';
-                } else {
-                    $uri = $seo->seo_route->uri == $seo->uri ? '*' : ($seo->uri != '/' ? $seo->uri : '');
-                }
-                $data[$uri] = [
-                    'data' => $seo->meta_json ?? [],
-                    'tags' => array_values($seo->tags ?? []),
-                    'template' => $seo->seo_route->template,
-                ];
-            }
-            $seoData[$seo->route_name] = $data;
-        }
-
-        return $seoData;
     }
 }
