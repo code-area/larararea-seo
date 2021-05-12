@@ -83,6 +83,26 @@ class SeoService extends BaseService
         return $seo;
     }
 
+	/**
+     * @param $item
+     * @return mixed
+     */
+    public function translationsCreated($item)
+    {
+        CachedSeo::updateSeoList();
+        return $item;
+    }
+
+    /**
+     * @param $item
+     * @return mixed
+     */
+    protected function translationsUpdated($item)
+    {
+        CachedSeo::updateSeoList();
+        return $item;
+    }
+
     /**
      * @param $data
      * @return mixed
